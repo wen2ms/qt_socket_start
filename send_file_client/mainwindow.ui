@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>293</width>
+    <width>428</width>
     <height>395</height>
    </rect>
   </property>
@@ -37,6 +37,13 @@
        </item>
        <item>
         <widget class="QLineEdit" name="port"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="connect_server">
+         <property name="text">
+          <string>connect server</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -74,7 +81,7 @@
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>63</width>
+           <width>131</width>
            <height>20</height>
           </size>
          </property>
@@ -94,7 +101,7 @@
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>63</width>
+           <width>130</width>
            <height>20</height>
           </size>
          </property>
@@ -110,7 +117,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>293</width>
+     <width>428</width>
      <height>24</height>
     </rect>
    </property>
