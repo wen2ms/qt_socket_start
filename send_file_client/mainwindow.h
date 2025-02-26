@@ -15,7 +15,13 @@ class MainWindow : public QMainWindow {
   public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+    
+  signals:
+    void start_connect(unsigned short port, QString ip);
+    
+  private slots:
+    void on_connect_server_clicked();
+    
   private:
     Ui::MainWindow *ui;
 };
