@@ -55,5 +55,5 @@ void MainWindow::on_send_message_clicked() {
     
     socket_->write(message.toUtf8());
     
-    ui->message->append("Server says: " + message);
+    ui->record->append("Server says: " + message);
 }

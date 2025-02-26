@@ -59,7 +59,7 @@ void MainWindow::on_send_message_clicked() {
     
     socket_->write(message.toUtf8());
     
-    ui->message->append("Client says: " + message);
+    ui->record->append("Client says: " + message);
 }
 
 void MainWindow::on_connect_clicked() {
