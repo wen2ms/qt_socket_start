@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include <QLabel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -28,5 +29,7 @@ class MainWindow : public QMainWindow {
     
     QTcpServer* server_;
     QTcpSocket* socket_;
+    
+    QLabel* status_;
 };
 #endif  // MAINWINDOW_H
