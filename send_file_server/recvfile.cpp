@@ -1,5 +1,6 @@
 #include "recvfile.h"
 
+#include <QDebug>
 #include <QFile>
 
 RecvFile::RecvFile(QObject *parent) : QThread{parent} {}
@@ -7,6 +8,8 @@ RecvFile::RecvFile(QObject *parent) : QThread{parent} {}
 RecvFile::RecvFile(QTcpSocket* socket, QObject* parent) : socket_(socket), QThread{parent} {}
 
 void RecvFile::run() {
+    qDebug() << "Server Subthread:" << QThread::currentThread();
+    
     QFile* file = new QFile("recv.txt");
     
     file->open(QFile::WriteOnly);

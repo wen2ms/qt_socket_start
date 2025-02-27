@@ -3,12 +3,16 @@
 #include <QHostAddress>
 #include <QFile>
 #include <QFileInfo>
+#include <QThread>
+#include <QDebug>
 
 SendFile::SendFile(QObject *parent) : QObject{parent} {
 }
 
 
 void SendFile::connect_server(unsigned short port, QString ip) {
+    qDebug() << "Client Connect Server Thread:" << QThread::currentThread();
+    
     socket_ = new QTcpSocket;
     
     socket_->connectToHost(QHostAddress(ip), port);
@@ -27,6 +31,8 @@ void SendFile::send_file(QString file_path) {
     QFile file(file_path);
     QFileInfo file_info(file);
     int file_size = file_info.size();
+    
+    qDebug() << "Client Send File Thread:" << QThread::currentThread();
     
     file.open(QFile::ReadOnly);
     

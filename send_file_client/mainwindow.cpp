@@ -3,12 +3,15 @@
 #include <QThread>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QDebug>
 
 #include "./ui_mainwindow.h"
 #include "sendfile.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    
+    qDebug() << "Client Main Thread:" << QThread::currentThread();
     
     ui->ip->setText("127.0.0.1");
     ui->port->setText("9999");

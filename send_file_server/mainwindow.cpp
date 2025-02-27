@@ -3,12 +3,17 @@
 #include <QHostAddress>
 #include <QMessageBox>
 #include <QTcpSocket>
+#include <QDebug>
 
 #include "./ui_mainwindow.h"
 #include "recvfile.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    
+    ui->port->setText("9999");
+    
+    qDebug() << "Server Main Thread:" << QThread::currentThread();
     
     server_ = new QTcpServer;
     
