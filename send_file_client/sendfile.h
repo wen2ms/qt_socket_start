@@ -18,6 +18,8 @@ class SendFile : public QObject {
     
     void disconnected();
     
+    void current_percent(int percent);
+    
   private:
     QTcpSocket* socket_;
 };

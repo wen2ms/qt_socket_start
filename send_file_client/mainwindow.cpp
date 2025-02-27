@@ -2,6 +2,7 @@
 
 #include <QThread>
 #include <QMessageBox>
+#include <QFileDialog>
 
 #include "./ui_mainwindow.h"
 #include "sendfile.h"
@@ -23,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     
     connect(this, &MainWindow::start_connect, worker, &SendFile::connect_server);
     
+    connect(this, &MainWindow::send_file, worker, &SendFile::send_file);
+    
     connect(worker, &SendFile::connected, this, [=]() {
         QMessageBox::information(this, "Connect Server", "Successfully connected to the server");
     });
@@ -34,6 +37,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         worker->deleteLater();
         send_file_thread->deleteLater();
     });
+    
+    connect(worker, &SendFile::current_percent, ui->progressBar, &QProgressBar::setValue);
+    
+    send_file_thread->start();
 }
 
 MainWindow::~MainWindow() {
@@ -45,4 +52,20 @@ void MainWindow::on_connect_server_clicked() {
     unsigned short port = ui->port->text().toUShort();
     
     emit start_connect(port, ip);
+}
+
+void MainWindow::on_set_file_clicked() {
+    QString file_path = QFileDialog::getOpenFileName();
+    
+    if (file_path.isEmpty()) {
+        QMessageBox::warning(this, "Open File", "The file path selected cannot be empty");
+        
+        return;
+    }
+    
+    ui->file_path->setText(file_path);
+}
+
+void MainWindow::on_send_file_clicked() {
+    emit send_file(ui->file_path->text());
 }

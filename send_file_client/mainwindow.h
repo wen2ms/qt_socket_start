@@ -19,8 +19,14 @@ class MainWindow : public QMainWindow {
   signals:
     void start_connect(unsigned short port, QString ip);
     
+    void send_file(const QString& file_path);
+    
   private slots:
     void on_connect_server_clicked();
+    
+    void on_set_file_clicked();
+    
+    void on_send_file_clicked();
     
   private:
     Ui::MainWindow *ui;
