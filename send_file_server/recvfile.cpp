@@ -5,10 +5,14 @@
 
 RecvFile::RecvFile(QObject *parent) : QThread{parent} {}
 
-RecvFile::RecvFile(QTcpSocket* socket, QObject* parent) : socket_(socket), QThread{parent} {}
+RecvFile::RecvFile(qintptr socket_descriptor, QObject* parent) : socket_descriptor_(socket_descriptor), QThread{parent} {}
 
 void RecvFile::run() {
     qDebug() << "Server Subthread:" << QThread::currentThread();
+    
+    socket_ = new QTcpSocket;
+    
+    socket_->setSocketDescriptor(socket_descriptor_);
     
     QFile* file = new QFile("recv.txt");
     
@@ -29,7 +33,6 @@ void RecvFile::run() {
         file->write(recv_data);
         
         if (received_size == total_file_size) {
-            socket_->close();
             socket_->deleteLater();
             
             file->close();

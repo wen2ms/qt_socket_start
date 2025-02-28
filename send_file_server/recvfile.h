@@ -9,7 +9,7 @@ class RecvFile : public QThread {
   public:
     explicit RecvFile(QObject *parent = nullptr);
     
-    explicit RecvFile(QTcpSocket* socket, QObject *parent = nullptr);
+    explicit RecvFile(qintptr socket_descriptor, QObject *parent = nullptr);
     
   protected:
     void run() override;
@@ -19,6 +19,8 @@ class RecvFile : public QThread {
     
   private:
     QTcpSocket* socket_;
+    
+    qintptr socket_descriptor_;
 };
 
 #endif  // RECVFILE_H

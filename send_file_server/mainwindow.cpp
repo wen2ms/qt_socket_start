@@ -15,16 +15,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     
     qDebug() << "Server Main Thread:" << QThread::currentThread();
     
-    server_ = new QTcpServer;
+    server_ = new MyTcpServer(this);
     
-    connect(server_, &QTcpServer::newConnection, this, [=]() {
-        QTcpSocket* socket = server_->nextPendingConnection();
-        
-        RecvFile* subthread = new RecvFile(socket);
+    connect(server_, &MyTcpServer::new_socket_descriptor, this, [=](qintptr socket_descriptor) {        
+        RecvFile* subthread = new RecvFile(socket_descriptor);
         
         subthread->start();
         
-        connect(subthread, &RecvFile::recv_completed, this, [=]() {
+        connect(subthread, &RecvFile::recv_completed, this, [=]() {            
             subthread->quit();
             subthread->wait();
             subthread->deleteLater();

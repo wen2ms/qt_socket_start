@@ -2,7 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QTcpServer>
+
+#include "mytcpserver.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -23,6 +24,6 @@ class MainWindow : public QMainWindow {
   private:
     Ui::MainWindow *ui;
     
-    QTcpServer* server_;
+    MyTcpServer* server_;
 };
 #endif  // MAINWINDOW_H
